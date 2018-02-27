@@ -1,0 +1,200 @@
+﻿
+
+<div class="modal-header">
+    <h1>Create New Survey</h1>
+</div>
+
+<div class="modal-body">
+    <form class="form-horizontal" name="surveyForm" novalidate role="form">
+        <div class="col-sm-8"></div> <div class="float-right col-sm-4">Survey date:{{survey.dateOfFullfillOfSurvey| date:'yyyy-MM-dd'}}</div>
+        <fieldset>
+            <legend>Basic Information</legend>
+
+            <div class="form-group" ng-class="{'has-error':surveyForm.fullName.$invalid && surveyForm.fullName.$dirty}">
+                <label for="fullName" class="col-sm-3 control-label">Name</label>
+                <div class="col-sm-9">
+                    <input type="text" id="fullName" name="fullName" class="form-control" ng-required="true"
+                           ng-model="editableSurvey.fullName" />
+                    <span class="help-block" ng-show="surveyForm.fullName.$error.required && surveyForm.fullName.$dirty">Full name is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="place" class="col-sm-3 control-label">Place</label>
+                <div class="col-sm-9">
+
+                    <input type="text"
+                           ng-model="customSelected" 
+                           placeholder="Where do you live"
+                           uib-typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}"
+                           typeahead-template-url="customTemplate.html"
+                           class="form-control"
+                           typeahead-show-hint="true"
+                           typeahead-min-length="0"
+                           name="place">
+                </div>
+            </div>
+            <div class="form-group show-errors">
+                <label for="email" class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" id="email" name="email" class="form-control" ng-required="true"
+                           ng-model="editableSurvey.email" />
+                    <span class="help-block" ng-show="surveyForm.email.$error.email && surveyForm.email.$touched">Please enter vaild email</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">Age range</label>
+                <div class="col-sm-9">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="ageRange" value="0-18"
+                                   ng-model="editableSurvey.ageRange" /> 0-18
+                        </label><br />
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="ageRange" value="18-29"
+                                   ng-model="editableSurvey.ageRange" /> 0-18
+                        </label><br />
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="ageRange" value="30-49"
+                                   ng-model="editableSurvey.ageRange" /> 30-49
+                        </label><br />
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="ageRange" value="50-64"
+                                   ng-model="editableSurvey.ageRange" /> 50-64
+                        </label><br />
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="ageRange" value="65-~"
+                                   ng-model="editableSurvey.ageRange" /> 65-~
+                        </label><br />
+                    </div>
+
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="salary" class="col-sm-3 control-label">Range of Salary</label>
+                <div class="col-sm-9">
+                    <select name="salary" id="salary" class="form-control"
+                            ng-model="editableSurvey.salary"
+                            ng-options="sal for sal in salaries"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="notes" class="col-sm-3 control-label">Notes</label>
+                <div class="col-sm-9">
+                    <textarea name="notes" id="notes" class="form-control" rows="5" cols="40"
+                              ng-model="editableSurvey.notes"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dateHired" class="col-sm-3 control-label">Last purchase time</label>
+                <div class="col-sm-9">
+                    <div uib-datepicker ng-model="editableSurvey.lastPurchaseTime" class="well well-sm" datepicker-options="options" name="dateHired"></div>
+                </div>
+            </div>
+        </fieldset>
+        <br />
+
+        <fieldset>
+            <legend>Marketing Mix</legend>
+            <div class="form-group">
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-3">
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="Price"
+                                   ng-model="editableSurvey.price" />Price
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="Qulaity"
+                                   ng-model="editableSurvey.quality" />Quality
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="Brand"
+                                   ng-model="editableSurvey.brand" />Brand
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="easyToUse"
+                                   ng-model="editableSurvey.easyToUse" />Easy To Use
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="nearToYou"
+                                   ng-model="editableSurvey.nearToYou" />Near To You
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="advertisement"
+                                   ng-model="editableSurvey.advertisement" />Advertisement
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Ideas</legend>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <span>Pharmaprix</span>
+                </div>
+                <div class="col-sm-9">
+                    <span uib-rating ng-model="editableSurvey.ratePharmaprix" max="max" read-only="isReadonly" on-hover="hoveringOver(value, 'Pharmaprix')" on-leave="overStarPharmaprix = null" titles="['one','two','three']" aria-labelledby="default-rating"></span>
+                    <span class="label" ng-class="{'label-warning': percentPharmaprix<30, 'label-info': percentPharmaprix>=30 && percentPharmaprix<70, 'label-success': percentPharmaprix>=70}" ng-show="overStarPharmaprix && !isReadonly">{{percentPharmaprix}}%</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <span>Metro</span>
+                </div>
+                <div class="col-sm-9">
+                    <span uib-rating ng-model="editableSurvey.rateMetro" max="max" read-only="isReadonly" on-hover="hoveringOver(value,'Metro')" on-leave="overStarMetro = null" titles="['one','two','three']" aria-labelledby="default-rating"></span>
+                    <span class="label" ng-class="{'label-warning': percentMetro<30, 'label-info': percentMetro>=30 && percentMetro<70, 'label-success': percentMetro>=70}" ng-show="overStarMetro && !isReadonly">{{percentMetro}}%</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <span>Provigo</span>
+                </div>
+                <div class="col-sm-9">
+                    <span uib-rating ng-model="editableSurvey.rateProvigo" max="max" read-only="isReadonly" on-hover="hoveringOver(value, 'Provigo')" on-leave="overStarProvigo = null" titles="['one','two','three']" aria-labelledby="default-rating"></span>
+                    <span class="label" ng-class="{'label-warning': percentProvigo<30, 'label-info': percentProvigo>=30 && percentProvigo<70, 'label-success': percentProvigo>=70}" ng-show="overStarProvigo && !isReadonly">{{percentProvigo}}%</span>
+                </div>
+            </div>
+        </fieldset>
+
+    </form>
+</div>
+
+<div class="modal-footer">
+
+    <div class="col-sm-offset-3 col-sm-9">
+        <input type="button" class="btn btn-default" value="Cancel"
+               ng-click="cancelForm()" />
+        <input type="submit" class="btn btn-primary" value="Submit"
+               ng-click="submitForm()" />
+    </div>
+</div>
